@@ -1,0 +1,30 @@
+{
+  "name": "project2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyleavb/project2.git"
+  },
+  "author": "Kyle Van Bergen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyleavb/project2/issues"
+  },
+  "homepage": "https://github.com/kyleavb/project2#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-ejs-layouts": "^2.3.1",
+    "rowdy": "^0.5.0",
+    "rowdy-logger": "^1.0.0",
+    "sequelize": "^4.34.0"
+  }
+}
