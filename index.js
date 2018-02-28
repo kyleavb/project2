@@ -28,6 +28,14 @@ app.get("/profile", isLoggedIn, function(req, res){
   res.render("main/profile")
 })
 
+app.get("/search", function(req, res){
+  res.render("main/search")
+});
+
+app.get("/decks", function(req, res){
+  res.render("main/decks")
+});
+
 var server = app.listen(process.env.PORT || 5000, function() {
 });
 
