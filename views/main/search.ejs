@@ -1,54 +1,142 @@
 <h1>Search</h1>
+<hr>
 <form class="search-form">
   <div class="row">
-    <div class="input-field col s12">
+    <div class="input-field col s10 offset-s1">
       <input name="name" type="text">
       <label for="name">Name</label>
     </div>
   </div>
   <div class="row">
-    <div class="col s4 search-group">
-      <h5 class="center">Color</h5>
-      <div class="row">
-        <div class="col s4">
-          <input type="checkbox" name="color" id="white" value="white">
-          <label for="white">White</label>
-        </div>
-        <div class="col s4">
-          <input type="checkbox" name="color" id="blue" value="blue">
-          <label for="blue">Blue</label>
-        </div>
-        <div class="col s4">
-          <input type="checkbox" name="color" id="black" value="black">
-          <label for="black">Black</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s4">
-          <input type="checkbox" name="color" id="green" value="green">
-          <label for="green">Green</label>
-        </div>
-        <div class="col s4">
-          <input type="checkbox" name="color" id="red" value="red">
-          <label for="red">Red</label>
-        </div>
-        <div class="col s4">
-          <input type="checkbox" name="color" id="clear" value="clear">
-          <label for="clear">Clear</label>
-        </div>
-      </div>
+    <div class="col s12">
+      <ul class="collapsible popout" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons large">color_lens</i><h5>Colors</h5></div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="col s4">
+                <input type="checkbox" name="color" id="white" value="white">
+                <label for="white">White</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="color" id="blue" value="blue">
+                <label for="blue">Blue</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="color" id="black" value="black">
+                <label for="black">Black</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4">
+                <input type="checkbox" name="color" id="green" value="green">
+                <label for="green">Green</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="color" id="red" value="red">
+                <label for="red">Red</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="color" id="clear" value="clear">
+                <label for="clear">Clear</label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons large">pets</i><h5>Type</h5></div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="col s4">
+                <input type="checkbox" name="type" id="Artifact" value="Artifact">
+                <label for="Artifact">Artifact</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="type" id="creature" value="creature">
+                <label for="creature">Creature</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="type" id="enchantment" value="enchantment">
+                <label for="enchantment">Enchantment</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4">
+                <input type="checkbox" name="type" id="instant" value="instant">
+                <label for="instant">Instant</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="type" id="land" value="land">
+                <label for="land">Land</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="type" id="legendary" value="legendary">
+                <label for="legendary">Legendary</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4">
+                <input type="checkbox" name="type" id="planeswalker" value="planeswalker">
+                <label for="planeswalker">Planeswalker</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="type" id="sorcery" value="sorcery">
+                <label for="sorcery">Sorcery</label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons large">flash_on</i><h5>Rarity</h5></div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="col s4">
+                <input type="checkbox" name="rarity" id="mythic" value="mythic">
+                <label for="mythic">Mythic</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="rarity" id="rare" value="rare">
+                <label for="rare">Rare</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="rarity" id="uncommon" value="uncommon">
+                <label for="uncommon">Uncommon</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4">
+                <input type="checkbox" name="rarity" id="common" value="common">
+                <label for="common">Common</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="rarity" id="promo" value="promo">
+                <label for="promo">Promo</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="rarity" id="land" value="land">
+                <label for="land">Land</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4">
+                <input type="checkbox" name="rarity" id="token" value="token">
+                <label for="token">Token</label>
+              </div>
+              <div class="col s4">
+                <input type="checkbox" name="rarity" id="special" value="special">
+                <label for="special">Special</label>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="col s4 red search-group">
-      <h5 class="center">Type</h5>
-      <div class="row">
-      
-      </div>
-    </div>
-    <div class="col s4 green search-group">
-      <h5 class="center">Rarity</h5>
-      <div class="row">
-
-      </div>
+  </div>
+  <div class="row">
+    <div class="col s12 center">
+      <button type="submit" class="btn waves-effect waves-light">Submit
+      <i class="material-icons right">send</i>
+      </button>
     </div>
   </div>
 </form>
