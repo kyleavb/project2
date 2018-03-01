@@ -4,3 +4,7 @@
   min-height: 15vw;
   height: 15vw;
 }
+
+.userInfo{
+  border: 2px black solid;
+}

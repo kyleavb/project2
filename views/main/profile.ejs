@@ -1,1 +1,60 @@
-<h3>Profile for <%= user.first_name %> <%= user.last_name %></h3>
+<div class="row">
+  <div class="col s12 m6">
+    <div class="row">
+      <div class="col s12 m12">
+        <h3 class="center">User Info</h3>
+        <h5><strong>UserID:</strong> <%= currentUser.userId %></h5>
+        <h5><strong>First Name:</strong> <%= currentUser.first_name %></h5>
+        <h5><strong>Last Name:</strong> <%= currentUser.last_name %></h5>
+        <h5><strong>Email:</strong> <%= currentUser.email %></h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m12">
+        <h3 class="center">Favorites</h3>
+      </div>
+      <div class="col s6 center">
+        <h5>Cards</h5>
+        <ul>
+          <li><a href="#">Card Name</a></li>
+          <li><a href="#">Card Name</a></li>
+          <li><a href="#">Card Name</a></li>
+        </ul>
+      </div>
+      <div class="col s6 center">
+        <h5>Decks</h5>
+        <ul>
+          <li><a href="#">Deck Name</a></li>
+          <li><a href="#">Deck Name</a></li>
+          <li><a href="#">Deck Name</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m6 center">
+    <h3>Your Recent Posted Decks</h3>
+    <ul>
+      <li><a href="#">Posted Deck Title</a></li>
+      <li><a href="#">Posted Deck Title</a></li>
+      <li><a href="#">Posted Deck Title</a></li>
+      <li><a href="#">Posted Deck Title</a></li>
+      <li><a href="#">Posted Deck Title</a></li>
+      <li><a href="#">Posted Deck Title</a></li>
+    </ul>
+    <a class="btn center" href="#">View all Posted Decks</a>
+  </div>
+  <div class="row">
+    <div class="col s12 m6 center">
+      <h3>Your Recent Comments</h3>
+      <ul>
+        <li><a href="#">Posted Deck Title</a></li>
+        <li><a href="#">Posted Deck Title</a></li>
+        <li><a href="#">Posted Deck Title</a></li>
+        <li><a href="#">Posted Deck Title</a></li>
+        <li><a href="#">Posted Deck Title</a></li>
+        <li><a href="#">Posted Deck Title</a></li>
+      </ul>
+      <a class="btn center" href="#">View all Comments</a>
+    </div>
+  </div>
+</div>

@@ -17,7 +17,8 @@ app.use(ejsLayouts);
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  user: user
 }));
 app.use(express.static(__dirname + "/public/"));
 app.use(flash());
@@ -27,22 +28,25 @@ app.use(passport.session());
 app.use(function(req, res, next){
   //before every route, attach flash messages and current user to res.locals
   res.locals.alerts = req.flash();
-  res.locals.currentUser = req.user;
+  if(!res.locals.currentUser){
+    res.locals.currentUser = req.user;
+  }
+  next();
+});
+
+app.use("/login", function(req, res, next){
+  if(!res.locals.currentUser){
+    res.locals.currentUser = req.user;
+  }
   next();
 });
 
 app.get("/", function(req, res){
-    res.render("main/home", {user: req.user})
-  });
-
-app.get("/login", function(req, res){
-  res.render("main/login", {user: req.user});
+  res.render("main/home")
 });
 
-app.get("/logout", function(req, res){
-  req.logout();
-  req.flash("success", "You have logged out!");
-  res.redirect("/");
+app.get("/login", function(req, res){
+  res.render("main/login");
 });
 
 app.post("/login", passport.authenticate("local", {
@@ -51,6 +55,12 @@ app.post("/login", passport.authenticate("local", {
   failureRedirect: "/login",
   failureFlash: "Invalid Username and/or Password"
 }));
+
+app.get("/logout", function(req, res){
+  req.logout();
+  req.flash("success", "You have logged out!");
+  res.redirect("/");
+});
 
 app.get("/createUser", function(req, res){
   res.render("main/singup", {user: req.user});
