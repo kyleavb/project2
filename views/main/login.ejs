@@ -1,68 +1,14 @@
-<div class="row">
-  <div class="col s12">
-    <div class="row">
-      <div class="col s5 black white-text login">
-        <h4>Log in</h4>
-        <hr>
-        <br />
-        <form class="log-in-form">
-        <div class="row">
-          <div class="input-field col s10 offset-s1">
-            <input type="text" name="userId" placeholder="User Name">
-            <label for="userId">UserID</lable>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s10 offset-s1">
-            <input type="password" name="in-password" placeholder="Password">
-            <label for="in-password">Password</lable>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s8 offset-s1 offset-m4">
-            <a class="btn" type="submit">Submit</a>
-          </div>
-        </div>
-        </form>
-      </div>
-      <div class="col s1"></div>
-      <div class="col s6 indigo darken-4 white-text create">
-        <h4>Create Account</h4>
-        <hr>
-        <br />
-        <form class="account-create-form">
-          <div class="row">
-            <div class="input-field col s6">
-              <input type="text" name="firstName" placeholder="First Name">
-              <label for="firstName">First Name</label>
-            </div>
-            <div class="input-field col s6">
-              <input type="text" name="lastName" placeholder="Last Name">
-              <label for="lastName">Last Name</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <input type="text" name="userId" placeholder="User ID">
-              <label for="userId">User ID</label>
-            </div>
-            <div class="input-field col s6">
-              <input type="password" name="password" placeholder="Password">
-              <label for="password">Password</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="email" name="email" placeholder="Your Email">
-              <label for="email">Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s8 offset-s1 offset-m4">
-              <a class="btn" type="submit">Submit</a>
-            </div>
-          </div>
-      </form>
-    </div>
+<h1>Login</h1>
+<br />
+<form method="POST" action="/login">
+  <input type="text" name="userId" placeholder="User Name">
+  <input type="password" name="in-password" placeholder="Password">
+  <div class="row center">
+    <button class="btn" type="submit">Submit</button>
   </div>
-</div>
+</form>
+<h5 class="center">Or
+  <br />
+  <br />
+  <a href="/createUser">Create an account Here!</a>
+</h5>

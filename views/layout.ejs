@@ -8,31 +8,26 @@
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <nav>
-      <div class="nav-wrapper black">
-        <a href="/" class="brand-logo center"><img src="/img/magic.png"></a>
-        <ul class="left">
-          <li><a href="/search">Search</a></li>
-          <li><a href="/decks">Decks</a></li>
-        </ul>
-        <ul class="right">
-          <li class="hide-on-small-and-down">
-            <div class="row">
-              <div class="col s12" >
-                <div class="input-field">
-                  <div class="row">
-                    <input id="search" type="search" required>
-                    <label class="center-align label-icon" for="search"><i class="center-align material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li><a href="/login">Login</a></li>
-        </ul>
-      </div>
-    </nav>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper black">
+          <a href="/" class="brand-logo center"><img src="/img/magic.png"></a>
+          <ul class="left">
+            <li><a href="/search">Search</a></li>
+            <li><a href="/decks">Decks</a></li>
+          </ul>
+          <ul class="right">
+            <li class="hide-on-small-and-down">
+              <form action="/search" method="POST">
+                <input class="input-field" name="name" type="search" placeholder="Quick Search Name" required>
+              </form>
+            </li>
+            <li><a href="/login">Login</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
     <div class="container">
 
     <%- body %>

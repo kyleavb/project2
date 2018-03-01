@@ -1,10 +1,16 @@
 <h1>Search</h1>
 <hr>
-<form class="search-form">
+<form class="search-form" action="/search" method="POST">
   <div class="row">
     <div class="input-field col s10 offset-s1">
       <input name="name" type="text">
       <label for="name">Name</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s3">
+      <input name="manaCost" type="number">
+      <label for="manaCost">Mana Cost:</lable>
     </div>
   </div>
   <div class="row">
@@ -91,39 +97,39 @@
           <div class="collapsible-body">
             <div class="row">
               <div class="col s4">
-                <input type="checkbox" name="rarity" id="mythic" value="mythic">
-                <label for="mythic">Mythic</label>
+                <input type="checkbox" name="rarity" id="mythic" value="Mythic Rare">
+                <label for="mythic">Mythic Rare</label>
               </div>
               <div class="col s4">
-                <input type="checkbox" name="rarity" id="rare" value="rare">
+                <input type="checkbox" name="rarity" id="rare" value="Rare">
                 <label for="rare">Rare</label>
               </div>
               <div class="col s4">
-                <input type="checkbox" name="rarity" id="uncommon" value="uncommon">
+                <input type="checkbox" name="rarity" id="uncommon" value="Uncommon">
                 <label for="uncommon">Uncommon</label>
               </div>
             </div>
             <div class="row">
               <div class="col s4">
-                <input type="checkbox" name="rarity" id="common" value="common">
+                <input type="checkbox" name="rarity" id="common" value="Common">
                 <label for="common">Common</label>
               </div>
               <div class="col s4">
-                <input type="checkbox" name="rarity" id="promo" value="promo">
+                <input type="checkbox" name="rarity" id="promo" value="Promo">
                 <label for="promo">Promo</label>
               </div>
               <div class="col s4">
-                <input type="checkbox" name="rarity" id="land" value="land">
+                <input type="checkbox" name="rarity" id="land" value="Land">
                 <label for="land">Land</label>
               </div>
             </div>
             <div class="row">
               <div class="col s4">
-                <input type="checkbox" name="rarity" id="token" value="token">
+                <input type="checkbox" name="rarity" id="token" value="Token">
                 <label for="token">Token</label>
               </div>
               <div class="col s4">
-                <input type="checkbox" name="rarity" id="special" value="special">
+                <input type="checkbox" name="rarity" id="special" value="Special">
                 <label for="special">Special</label>
               </div>
             </div>
