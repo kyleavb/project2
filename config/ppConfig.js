@@ -19,6 +19,7 @@ passport.use(new LocalStrategy({
   db.user.find({
     where: {userId: userId}
   }).then(function(user){
+    console.log("check")
     if(!user || !user.validPassword(password)){
       cb(null, false);
     }else{

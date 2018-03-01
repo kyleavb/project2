@@ -1,36 +1,62 @@
+require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
 var passport = require('./config/ppConfig');
+var session = require('express-session');
 var ejsLayouts = require("express-ejs-layouts")
-var isLoggedIn = require("./middleware/isLoggedIn")
+var isLoggedIn = require("./middleware/isLoggedIn");
+var flash = require("connect-flash");
 var mtg = require("mtgsdk");
 var db = require("./models");
 var app = express();
+var user;
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(ejsLayouts)
+app.use(ejsLayouts);
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(express.static(__dirname + "/public/"));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use(function(req, res, next){
+  //before every route, attach flash messages and current user to res.locals
+  res.locals.alerts = req.flash();
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.get("/", function(req, res){
-    res.render("main/home")
+    res.render("main/home", {user: req.user})
   });
 
 app.get("/login", function(req, res){
-  res.render("main/login");
+  res.render("main/login", {user: req.user});
 });
 
-app.post("/login",function(req, res){
-  console.log("Login Post Route")
-  res.redirect("/login")
+app.get("/logout", function(req, res){
+  req.logout();
+  req.flash("success", "You have logged out!");
+  res.redirect("/");
 });
+
+app.post("/login", passport.authenticate("local", {
+  successRedirect: "/",
+  successFlash: "You have Logged in",
+  failureRedirect: "/login",
+  failureFlash: "Invalid Username and/or Password"
+}));
+
 app.get("/createUser", function(req, res){
-  res.render("main/singup");
+  res.render("main/singup", {user: req.user});
 });
 
 app.post("/createUser", function(req, res){
-  console.log("Create User Post Route")
   db.user.findOrCreate({
     where: {email: req.body.email},
     defaults: {
@@ -47,19 +73,24 @@ app.post("/createUser", function(req, res){
         successFlash: "Account Created and Logged In!"
       })(req, res)
     }else{
-      console.log("Email Exists")
-      req.flash("Error: ", error.message)
-      res.redirect("/login")
+      req.flash("error", "This Email already exists ")
+      res.redirect("/createUser")
     }
-  })
+  }).catch(function(error){
+    req.flash("error", "Some other Shit broke")
+    res.redirect("/createUser")
+  });
 });
+
 
 app.get("/profile", isLoggedIn, function(req, res){
-  res.render("main/profile")
+  res.render("main/profile", {user: req.user})
 });
 
+//UPDATE profile route
+
 app.get("/search", function(req, res){
-  res.render("main/search")
+  res.render("main/search", {user: req.user})
 });
 
 app.post("/search", function(req, res){
@@ -72,7 +103,7 @@ app.post("/search", function(req, res){
     rarity: req.body.rarity
   })
   .then(result => {
-    res.render("main/results", {results: result})
+    res.render("main/results", {results: result, user: req.user})
   });
 });
 
@@ -82,12 +113,12 @@ app.get("/card/:id", function(req, res){
   })
   .then(result => {
     console.log(result)
-    res.render("main/cardDetail", {card: result})
+    res.render("main/cardDetail", {card: result, user: req.user})
   })
 });
 
 app.get("/decks", function(req, res){
-  res.render("main/decks")
+  res.render("main/decks", {user: req.user})
 });
 
 var server = app.listen(process.env.PORT || 5000, function() {

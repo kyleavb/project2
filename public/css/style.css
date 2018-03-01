@@ -1,0 +1,6 @@
+.desc{
+  position: relative;
+  overflow: scroll;
+  min-height: 15vw;
+  height: 15vw;
+}

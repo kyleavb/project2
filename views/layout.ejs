@@ -22,19 +22,26 @@
                 <input class="input-field" name="name" type="search" placeholder="Quick Search Name" required>
               </form>
             </li>
-            <li><a href="/login">Login</a></li>
+            <% if(user){ %>
+              <li><a class="dropdown-button"  data-activates="dropdown1" href="/profile"><%= user.userId %><i class="material-icons right">arrow_drop_down</i></a></li>
+            <% }else{ %>
+              <li><a href="/login">Login</a></li>
+            <% } %>
           </ul>
         </div>
       </nav>
     </div>
-
+    <ul id="dropdown1" class="dropdown-content grey">
+      <li><a href="/profile">Profile</a></li>
+      <li class="divider"></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
     <div class="container">
-
     <%- body %>
 
     </div>
 
-    <div class="fixed-action-btn vertical">
+    <div class="fixed-action-btn vertical hide-on-small">
       <a class="btn-floating black">
         <i class="large material-icons">info</i>
       </a>
@@ -49,5 +56,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
+    <% include partials/alerts %>
   </body>
 </html>
