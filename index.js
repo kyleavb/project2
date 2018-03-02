@@ -222,7 +222,7 @@ app.delete("/favorite/:id", isLoggedIn, function(req, res){
 
 app.get("/posts", function(req, res){
   res.render("main/posts")
-})
+});
 
 var server = app.listen(process.env.PORT || 5000, function() {
 });
