@@ -129,8 +129,18 @@ app.post("/search", function(req, res){
     qs: query
   }, function(error, response, body){
     if(!error && response.statusCode == 200){
-      var dataObj = JSON.parse(body);
-      res.render("main/results", {results: dataObj.cards})
+      if(req.user){
+        db.deck.findAll({
+          where: {userId: req.user.dataValues.id}
+        })
+        .then(function(decks){
+          var dataObj = JSON.parse(body);
+          res.render("main/results", {results: dataObj.cards, decks: decks})
+        })
+      }else{
+        var dataObj = JSON.parse(body);
+        res.render("main/results", {results: dataObj.cards})
+      }
     }
   })
 });
@@ -145,13 +155,34 @@ app.get("/card/:id", function(req, res){
 });
 
 app.get("/decks", isLoggedIn, function(req, res){
-  db.deck
-  res.render("main/decks")
+  db.deck.findAll({
+  }).then(function(decks){
+    res.render("main/decks", {decks: decks})
+  })
 });
 
+app.put("/decks/:deckId/add/:cardId", isLoggedIn, function(req, res){
+  db.deck.findOne({
+    where: {id: req.params.deckId}
+  })
+  .then(function(deck){
+    deck.cards.push(req.params.cardId)
+    db.deck.update({
+      cards: deck.cards
+    },{
+      where: {id: deck.id}
+    })
+  })
+})
+
 app.post("/decks", isLoggedIn, function(req, res){
-  db.deck.findOrCreate({
-    where: {}
+  db.deck.create({
+    name: req.body.deckName,
+    userId: req.user.dataValues.id,
+    cards: []
+  }).then(function(){
+    req.flash("success", "Deck Created! Add Cards Now.")
+    res.redirect("/decks")
   })
 });
 
@@ -173,9 +204,25 @@ app.post("/favorite", isLoggedIn, function(req, res){
     }else{
       req.flash("error", "Card Already on List!")
     }
+    res.redirect('back');
   })
 })
 
+app.delete("/favorite/:id", isLoggedIn, function(req, res){
+  db.favcard.destroy({
+    where: {
+      cardId: req.params.id,
+      userId: req.user.dataValues.id
+    }
+  }).then(function(deletedCard){
+    req.flash("success", "Favorite Removed")
+    res.send()
+  })
+});
+
+app.get("/posts", function(req, res){
+  res.render("main/posts")
+})
 
 var server = app.listen(process.env.PORT || 5000, function() {
 });

@@ -1,5 +1,7 @@
 <h1>Reults</h1>
 <hr>
+
+
 <% if(results.length > 0){ %>
   <div class="row">
     <% results.forEach(function(result, i){ %>
@@ -17,7 +19,26 @@
           <div class="card-action">
             <div class="row">
               <div class="col s4">
-                <button class="btn-small" href="#">+Deck</button>
+                <% if(currentUser){ %>
+                  <a class='dropdown-button btn' href='#' data-activates='dropdown<%= i %>'>+Deck</a>
+                  <ul id='dropdown<%= i %>' class='dropdown-content'>
+                    <% if(decks){ %>
+                      <% decks.forEach(function(deck){ %>
+                        <form class="addCard" method="" action="/decks/<%= deck.id %>/add/<%= result.id %>">
+                          <input type="hidden" value="<%= result.name %>" name="cardName">
+                          <input type="hidden" value="<%= result.imageUrl %>" name="cardImg">
+                          <input type="hidden" value="<%= result.id %>" name="cardId">
+                          <button type="submit"><%= deck.name %></button>
+                        </form>
+                        <br />
+                      <% }) %>
+                    <% }else{ %>
+                      <li><a href="#!">No Decks</a></li>
+                    <% } %>
+                  </ul>
+                <% }else{ %>
+                  <a class="btn" href="/login">Login</a>
+                <% } %>
               </div>
               <div class="col s4">
                 <form action="/favorite" method="POST">
@@ -27,9 +48,8 @@
                 </form>
               </div>
               <div class="col s4">
-                <a class="btn-small" href="https://shop.tcgplayer.com/magic/product/show?ProductName=<%= result.name %>">Shop</a>
+                <a class="btn" href="https://shop.tcgplayer.com/magic/product/show?ProductName=<%= result.name %>">Shop</a>
               </div>
-
             </div>
           </div>
         </div>

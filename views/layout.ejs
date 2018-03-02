@@ -15,6 +15,7 @@
           <ul class="left">
             <li><a href="/search">Search</a></li>
             <li><a href="/decks">Decks</a></li>
+            <li><a href="/posts">Posts</a></li>
           </ul>
           <ul class="right">
             <li class="hide-on-small-and-down">
@@ -23,7 +24,7 @@
               </form>
             </li>
             <% if(currentUser){ %>
-              <li><a class="dropdown-button"  data-activates="dropdown1" href="/profile"><%= currentUser.userId %><i class="material-icons right">arrow_drop_down</i></a></li>
+              <li><a class="dropdown-button"  data-activates="userDrop" href="/profile"><%= currentUser.userId %><i class="material-icons right">arrow_drop_down</i></a></li>
             <% }else{ %>
               <li><a href="/login">Login</a></li>
             <% } %>
@@ -31,7 +32,7 @@
         </div>
       </nav>
     </div>
-    <ul id="dropdown1" class="dropdown-content grey">
+    <ul id="userDrop" class="dropdown-content grey">
       <li><a href="/profile">Profile</a></li>
       <li class="divider"></li>
       <li><a href="/logout">Logout</a></li>

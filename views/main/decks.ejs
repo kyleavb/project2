@@ -1,1 +1,19 @@
 <h1>Decks</h1>
+<ul class="collapsible popout" data-collapsible="accordion">
+  <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">filter_drama</i>Create New Deck</div>
+        <div class="collapsible-body input-field">
+          <form action="/decks" method="post">
+            <input type="text" class="input-field" name="deckName">
+            <label for="deckName">Deck Name</label>
+            <button type="submit" class="">Submit</button>
+          </form>
+        </div>
+      </li>
+    </ul>
+
+<h3>Current Decks</h3>
+<% decks.forEach(function(deck){ %>
+  <p><%=deck.name%> : <%=deck.userId%> : <%= deck.cards.length %> </p>
+<% }) %>
