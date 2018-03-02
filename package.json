@@ -34,7 +34,7 @@
     "request": "^2.83.0",
     "rowdy": "^0.5.0",
     "rowdy-logger": "^1.0.0",
-    "sequelize": "^4.34.0",
+    "sequelize": "^3.30.4",
     "sequelize-cli": "^4.0.0"
   }
 }
