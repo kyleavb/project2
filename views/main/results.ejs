@@ -15,8 +15,22 @@
             <p><%= result.text %></p>
           </div>
           <div class="card-action">
-            <a href="#">Add to Deck</a>
-            <a  class="right" href="#"><i class="material-icons">favorite</i></a>
+            <div class="row">
+              <div class="col s4">
+                <button class="btn-small" href="#">+Deck</button>
+              </div>
+              <div class="col s4">
+                <form action="/favorite" method="POST">
+                  <input type="hidden" value="<%= result.id %>" name="cardInfo">
+                  <input type="hidden" value="<%= result.name %>" name="cardName">
+                  <button class="btn-small right round" type="submit"><i class="material-icons">favorite</i></button>
+                </form>
+              </div>
+              <div class="col s4">
+                <a class="btn-small" href="https://shop.tcgplayer.com/magic/product/show?ProductName=<%= result.name %>">Shop</a>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>

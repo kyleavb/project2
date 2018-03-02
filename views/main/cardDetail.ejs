@@ -1,1 +1,106 @@
-<h1>Card Detail For: <%= card[0].name %> </h1>
+<div class="row">
+
+  <h3 class="center">Card Details</h3>
+  <hr>
+  <div class="col s12 m5 center">
+    <h3><%= card.name %></h3>
+    <img src="<%= card.imageUrl %>">
+  </div>
+  <div class="col s12 m7">
+    <br />
+
+    <h5><strong>Type:</strong>
+    <% if(card.type){ %>
+      <%= card.type %></h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+
+    <h5><strong>Mana Cost:</strong>
+    <% if(card.manaCost){ %>
+      <%= card.manaCost %></h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+
+    <h5><strong>Converted Mana Cost:</strong>
+    <% if(card.cmc){ %>
+      <%= card.cmc %></h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+
+    <h5><strong>Color:</strong>
+    <% if(card.colors){ %>
+      <% card.colors.forEach(function(color){ %>
+        <%= color %>
+      <% }) %>
+      </h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+
+    <h5><strong>Rarity:</strong>
+    <% if(card.rarity){ %>
+      <%= card.rarity %></h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+
+    <h5><strong>Set:</strong>
+    <% if(card.set){ %>
+      <%= card.set %></h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+
+    <h5><strong>Power:</strong>
+    <% if(card.power){ %>
+      <%= card.power %></h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+
+    <h5><strong>Toughness:</strong>
+    <% if(card.toughness){ %>
+      <%= card.toughness %></h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+
+    <h5><strong>Layout:</strong>
+    <% if(card.layout){ %>
+      <%= card.layout %></h5>
+    <% }else{ %>
+      N/A</h5>
+    <% } %>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <hr>
+    <h3><strong>Card Text</strong></h3>
+    <p class="flow-text"><%= card.text %></p>
+  </div>
+</div>
+<% if(card.rulings){ %>
+  <h3><strong>Offical Rulings</strong></h3>
+  <% card.rulings.forEach(function(rule){ %>
+    <div class="row">
+      <div class="col s12">
+        <hr>
+        <br />
+        <h5><strong>Ruling Date:</strong> <%= rule.date %></h5>
+        <p class="flow-text"><%= rule.text %></p>
+      </div>
+    </div>
+  <% }) %>
+<% } %>
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+    </ul>
+  </div>

@@ -1,30 +1,21 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('decks', {
+    return queryInterface.createTable('favcards', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerId: {
-        type: Sequelize.INTEGER
-      },
-      name: {
+      cardId: {
         type: Sequelize.STRING
       },
-      up: {
+      userId: {
         type: Sequelize.INTEGER
       },
-      down: {
-        type: Sequelize.INTEGER
-      },
-      total: {
-        type: Sequelize.INTEGER
-      },
-      cards: {
-        type: Sequelize.ARRAY
+      cardName: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +28,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('decks');
+    return queryInterface.dropTable('favcards');
   }
 };

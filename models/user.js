@@ -57,6 +57,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   user.associate = function(models) {
     // associations can be defined here
+    models.user.hasMany(models.deck)
+    models.user.hasMany(models.favcard);
   };
   user.prototype.validPassword = function(passwordTyped){
     return bcrypt.compareSync(passwordTyped, this.password)

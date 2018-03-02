@@ -8,6 +8,7 @@ var isLoggedIn = require("./middleware/isLoggedIn");
 var flash = require("connect-flash");
 var mtg = require("mtgsdk");
 var db = require("./models");
+var request = require("request");
 var app = express();
 var user;
 
@@ -28,13 +29,6 @@ app.use(passport.session());
 app.use(function(req, res, next){
   //before every route, attach flash messages and current user to res.locals
   res.locals.alerts = req.flash();
-  if(!res.locals.currentUser){
-    res.locals.currentUser = req.user;
-  }
-  next();
-});
-
-app.use("/login", function(req, res, next){
   if(!res.locals.currentUser){
     res.locals.currentUser = req.user;
   }
@@ -63,7 +57,7 @@ app.get("/logout", function(req, res){
 });
 
 app.get("/createUser", function(req, res){
-  res.render("main/singup", {user: req.user});
+  res.render("main/singup");
 });
 
 app.post("/createUser", function(req, res){
@@ -94,27 +88,51 @@ app.post("/createUser", function(req, res){
 
 
 app.get("/profile", isLoggedIn, function(req, res){
-  res.render("main/profile", {user: req.user})
+
+  db.favcard.findAll({
+    where: {userId: req.user.dataValues.id},
+  })
+  .then(function(results){
+    res.render("main/profile", {userInfo: results})
+  })
 });
 
 //UPDATE profile route
 
 app.get("/search", function(req, res){
-  res.render("main/search", {user: req.user})
+  res.render("main/search")
 });
 
 app.post("/search", function(req, res){
-  //console.log("Searched for: " + req.body)
-  mtg.card.where({
-    name:req.body.name,
-    colors: req.body.color,
+  var searchType = ""
+  var searchRarity = ""
+  var searchColor = ""
+  if(req.body.color){
+    searchColor = req.body.color.toString()
+  }
+  if(req.body.type){
+    searchType = req.body.type.toString()
+  }
+  if(req.body.rarity){
+    searchRarity = req.body.rarity.toString()
+  }
+
+  var query = {
+    name: req.body.name,
     cmc: req.body.manaCost,
-    types: req.body.type,
-    rarity: req.body.rarity
+    colors: searchColor,
+    type: searchType,
+    rarity: searchRarity
+  }
+  request({
+    url:"https://api.magicthegathering.io/v1/cards",
+    qs: query
+  }, function(error, response, body){
+    if(!error && response.statusCode == 200){
+      var dataObj = JSON.parse(body);
+      res.render("main/results", {results: dataObj.cards})
+    }
   })
-  .then(result => {
-    res.render("main/results", {results: result, user: req.user})
-  });
 });
 
 app.get("/card/:id", function(req, res){
@@ -122,14 +140,42 @@ app.get("/card/:id", function(req, res){
     id: req.params.id
   })
   .then(result => {
-    console.log(result)
-    res.render("main/cardDetail", {card: result, user: req.user})
+    res.render("main/cardDetail", {card: result[0]})
   })
 });
 
-app.get("/decks", function(req, res){
-  res.render("main/decks", {user: req.user})
+app.get("/decks", isLoggedIn, function(req, res){
+  db.deck
+  res.render("main/decks")
 });
+
+app.post("/decks", isLoggedIn, function(req, res){
+  db.deck.findOrCreate({
+    where: {}
+  })
+});
+
+app.post("/favorite", isLoggedIn, function(req, res){
+  db.favcard.findOrCreate({
+    where: {
+      userId: req.user.dataValues.id,
+      cardName: req.body.cardName
+    },
+    defaults:{
+      cardId: req.body.cardInfo,
+      userId: req.user.dataValues.id,
+      cardName: req.body.cardName
+    }
+  })
+  .spread(function(favorite, created){
+    if(created){
+      req.flash("success", "Added to Favorites List!")
+    }else{
+      req.flash("error", "Card Already on List!")
+    }
+  })
+})
+
 
 var server = app.listen(process.env.PORT || 5000, function() {
 });

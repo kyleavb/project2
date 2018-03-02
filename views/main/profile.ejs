@@ -13,13 +13,17 @@
       <div class="col s12 m12">
         <h3 class="center">Favorites</h3>
       </div>
-      <div class="col s6 center">
+      <div class="col s6 center red">
         <h5>Cards</h5>
-        <ul>
-          <li><a href="#">Card Name</a></li>
-          <li><a href="#">Card Name</a></li>
-          <li><a href="#">Card Name</a></li>
-        </ul>
+          <% if(userInfo.length > 0){ %>
+            <ul>
+              <% userInfo.forEach(function(favCard){ %>
+                <li class="left text-float"><a href="/card/<%= favCard.cardId %>"><%= favCard.cardName %></a></li>
+              <% }) %>
+            </ul>
+          <% }else{ %>
+            <h5>No Favorite Cards</h5>
+          <% } %>
       </div>
       <div class="col s6 center">
         <h5>Decks</h5>
