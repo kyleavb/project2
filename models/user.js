@@ -60,9 +60,9 @@ module.exports = (sequelize, DataTypes) => {
     models.user.hasMany(models.deck)
     models.user.hasMany(models.favcard);
   };
-  user.prototype.validPassword = function(passwordTyped){
-    return bcrypt.compareSync(passwordTyped, this.password)
-  };
+  // user.prototype.validPassword = function(passwordTyped){
+  //   return bcrypt.compareSync(passwordTyped, this.password)
+  // };
   user.prototype.toJSON = function(){
     var userData = this.get();
     delete user.password;
