@@ -35,6 +35,7 @@ app.use(function(req, res, next){
   next();
 });
 
+
 app.get("/", function(req, res){
   res.render("main/home")
 });
