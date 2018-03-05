@@ -41,8 +41,8 @@ URL | VERB | ACTION | Purpose
 /decks | GET | index | Pulls all created decks from user
 /decks/:id | GET | index |Display specific deck information
 /decks/:id | DELETE | remove | Will delete deck this route is called on
-/decks/:deckId/add/:cardId | PUT | will update deck with specific card information user wants to add
-/decks/:deckId/delete:cardId | PUT | will remove specific card from user deck
+/decks/:deckId/add/:cardId | PUT | modify | will update deck with specific card information user wants to add
+/decks/:deckId/delete/:cardId | PUT | modify |will remove specific card from user deck
 /decks/create | POST | create | Will add a new deck to users deck list
 /favorite | POST | create | Route will add a card to user favorite table
 /favorite/:id | DELETE | remove | removes the favorited card from list
@@ -51,3 +51,15 @@ URL | VERB | ACTION | Purpose
 /posts | POST | create | will create the post if user has deck with over 30 cards
 /posts | PUT |update | will update post information with up/down votes
 /posts | DELETE | remove | This route will delete the specific post
+
+## General User Flow
+1. Create Account
+2. Login
+3. Search API for cards
+4. Create deck
+5. Save Cards to Deck
+6. post deck
+7. engage in thoughtful and polite discourse via the internet on the pros and cons of their selected cards.  While maintaining a level of civility and gratitude to their fellow humans.
+
+## Development
+I had a good time creating this webapp.  While I wanted to include so much more, I was unable to get the finishing polish on I wanted.  
