@@ -1,1 +1,8 @@
-<h1>BIG TIME!</h1>
+<h1><%= post.deck.name %></h1>
+<h5>Created by: <%= post.user.userId %></h5>
+<hr>
+<h3>Cards</h3>
+<% post.deck.cardName.forEach(function(card, i){ %>
+  <a href="/card/<%= post.deck.cards[i] %>"><p><%= card %></p></a>
+<% }) %>
+<hr>

@@ -184,7 +184,7 @@ app.delete("/decks/:id", isLoggedIn, function(req, res){
       id: req.params.id,
       userId: req.user.dataValues.id
     }
-  }).then(function(deletedCard){
+  }).then(function(deletedDeck){
     req.flash("success", "Deck Deleted")
     res.send()
   })
@@ -225,7 +225,7 @@ app.put("/decks/:deckId/delete/:cardId", isLoggedIn, function(req, res){
     },{
       where: {id: deck.id}
     }).then(function(data){
-      res.render("main/deckEdit")
+      res.send("")
     })
   })
 })
@@ -290,9 +290,13 @@ app.get("/posts", function(req, res){
 
 });
 
-app.get("/posts/:id",function(req, res){
-  //focus in on a post
-  res.render("main/postDetail")
+app.get("/posts/:id", isLoggedIn, function(req, res){
+  db.post.findOne({
+    where: {id: req.params.id},
+    include: [db.deck, db.user]
+  }).then(function(post){
+    res.render("main/postDetail", {post: post})
+  })
 })
 
 app.post("/posts", isLoggedIn, function(req, res){
@@ -302,13 +306,36 @@ app.post("/posts", isLoggedIn, function(req, res){
     userId: req.user.dataValues.id,
     title: "test",
   }).then(function(){
-    req.flash("success", "Deck Posted!")
+    db.deck.update({
+      posted: true
+    },{
+      where: {id: req.body.deckId}
+    }).then(function(data){
+      res.render("main/deckEdit")
+    })
   })
 })
 
 app.put("/posts", isLoggedIn, function(req, res){
-  //update post
-  //update votes
+  db.deck.findOne({
+    where: {id:req.body.deckId}
+  }).done(function(updateDeck){
+    var upVal = updateDeck.upvote
+    var downVal = updateDeck.downvote
+    if(req.body.voteDir === "up"){
+      upVal = upVal + 1;
+    }else{
+      downVal = downVal + 1;
+    }
+    db.deck.update({
+      upvote: upVal,
+      downvote: downVal
+    },{
+      where: {id: req.body.deckId}
+    }).then(function(data){
+      res.send("")
+    })
+  })
 })
 
 app.delete("/posts", isLoggedIn, function(req, res){

@@ -1,5 +1,4 @@
 $(".addPost").click(function(e){
-  console.log("redirect")
   e.preventDefault();
   $.ajax({
     method: "POST",
@@ -11,6 +10,21 @@ $(".addPost").click(function(e){
     location.reload();
   })
 })
+
+$(".addVote").click(function(e){
+  e.preventDefault();
+  $.ajax({
+    method: "PUT",
+    url: $(this).attr("href"),
+    data: {
+      voteDir: $(this).attr('data-dir'),
+      deckId: $(this).attr('data-deck')
+    }
+  }).done(function(data){
+    location.reload();
+  })
+})
+
 $(".fav-delete").click(function(e){
   e.preventDefault();
   $.ajax({
