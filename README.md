@@ -27,6 +27,7 @@ I wanted to create a community page for players of the card game Magic The Gathe
 
 ## Routes Table
 URL | VERB | ACTION | Purpose
+--- | --- | --- | ---
 / | GET | index | Display Landing page
 /login | GET | index | Display Login Form and Link to create Account
 /login | POST | Create | User attempts to log in with information
