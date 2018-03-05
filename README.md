@@ -34,4 +34,20 @@ URL | VERB | ACTION | Purpose
 /logout | GET | modify | Ends logged in users Session
 /createUser | GET |index| Display form to create new user
 /createUser | POST | create| Creates new User based on input
-/profile
+/profile | GET | index | Displays currently logged in user info
+/search | GET | index | Displays Search input form
+/search | POST | Query | Using form data, requests info from API and displays on results EJS
+/card/:id | GET | index | passed form existing links, will call API to display single card
+/decks | GET | index | Pulls all created decks from user
+/decks/:id | GET | index |Display specific deck information
+/decks/:id | DELETE | remove | Will delete deck this route is called on
+/decks/:deckId/add/:cardId | PUT | will update deck with specific card information user wants to add
+/decks/:deckId/delete:cardId | PUT | will remove specific card from user deck
+/decks/create | POST | create | Will add a new deck to users deck list
+/favorite | POST | create | Route will add a card to user favorite table
+/favorite/:id | DELETE | remove | removes the favorited card from list
+/posts | GET | Index | Displays all current posted decks
+/posts/:id | GET | |index | Display specific details about a posted deck
+/posts | POST | create | will create the post if user has deck with over 30 cards
+/posts | PUT |update | will update post information with up/down votes
+/posts | DELETE | remove | This route will delete the specific post
