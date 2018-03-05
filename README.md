@@ -2,6 +2,19 @@
 ## Intro
 I wanted to create a community page for players of the card game Magic The Gathering.  I wanted users to be able to browse cards, add their favorite cards to a list, build a deck, and post that deck to have other members review and comment on it.
 
+## Setup
+To run local:
+1. Fork
+2. Clone
+3. npm start
+4. open browser
+5. http://localhost:5000/
+6. Enjoy!
+
+Or
+
+1. [Click Here for Heroku! https://magicthedatabase.herokuapp.com/](https://magicthedatabase.herokuapp.com/)
+
 ## Tech Used
 * Materialize CSS
 * Heroku for app hosting
@@ -63,3 +76,10 @@ URL | VERB | ACTION | Purpose
 
 ## Development
 I had a good time creating this webapp.  While I wanted to include so much more, I was unable to get the finishing polish on I wanted.  
+
+### Wireframes
+![alt text](https://github.com/kyleavb/project2/blob/master/public/img/Magic%20DB%20Landing.png)
+![alt text](https://github.com/kyleavb/project2/blob/master/public/img/Create%20Account%20Page.png)
+![alt text](https://github.com/kyleavb/project2/blob/master/public/img/Profile%20Page.png)
+![alt text](https://github.com/kyleavb/project2/blob/master/public/img/Search%20Page.png)
+![alt text](https://github.com/kyleavb/project2/blob/master/public/img/New%20Mockup%201.png)
