@@ -1,0 +1,10 @@
+<h1> Edit Deck: <%= deck.name %></h1>
+<% if(deck.cards > 0){ %>
+  <ul>
+    <% deck.cards.forEach(function(card, i){ %>
+      <li><h5><%= deck.cardName[i] %></h5> <a class="removeCardFromDeck btn" href="/decks/<%= deck.id %>/delete/<%= card %>">Remove <%= deck.cardName[i] %></a></li>
+    <% }) %>
+  </ul>
+<% }else{ %>
+  <h3>No cards to display<h3>
+<% } %>

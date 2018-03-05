@@ -2,9 +2,9 @@
 <ul class="collapsible popout" data-collapsible="accordion">
   <ul class="collapsible" data-collapsible="accordion">
       <li>
-        <div class="collapsible-header"><i class="material-icons">filter_drama</i>Create New Deck</div>
+        <div class="collapsible-header"><i class="material-icons">filter_drama</i><h5>Create New Deck</h5></div>
         <div class="collapsible-body input-field">
-          <form action="/decks" method="post">
+          <form action="/decks/create" method="post">
             <input type="text" class="input-field" name="deckName">
             <label for="deckName">Deck Name</label>
             <button type="submit" class="">Submit</button>
@@ -14,6 +14,38 @@
     </ul>
 
 <h3>Current Decks</h3>
-<% decks.forEach(function(deck){ %>
-  <p><%=deck.name%> : <%=deck.userId%> : <%= deck.cards.length %> </p>
-<% }) %>
+<hr>
+<% if(decks.length > 0){ %>
+  <% decks.forEach(function(deck){ %>
+    <h5><%= deck.name %></h5>
+    <div class="row">
+      <div class="col s2">
+        <p><strong>Graph coming soon</strong></p>
+      </div>
+      <div class="col s10 center">
+        <% if(deck.cardName.length > 0){ %>
+          <p><strong>Cards in Deck: <%= deck.cardName.length %> </strong><strong>Card List:</strong></p>
+          <% deck.cardName.forEach(function(name, i){ %>
+            <p><a href="/card/<%= deck.cards[i] %>"><%= name %></a></p>
+          <% }) %>
+        <% }else{ %>
+          <p>No Cards Added to <%= deck.name %> yet.</p>
+        <% } %>
+        <br />
+      </div>
+      <div class="row">
+        <div class="col s12 center">
+          <a class="btn left" href="/decks/<%= deck.id %>">Edit Deck</a>
+          <a class="btn tooltipped" data-position="top" data-delay="50" data-tooltip="Deck must have 30 cards." href="">Post Deck</a>
+          <a class="btn right deleteDeck" href="/decks/<%= deck.id %>">Delete Deck </a>
+        </div>
+      </div>
+    </div>
+    <hr>
+  <% }) %>
+<% }else{ %>
+  <div class="center">
+    <br />
+    <h5>No decks created! Create a new one above.</h5>
+  </div>
+<% } %>

@@ -17,11 +17,17 @@ module.exports = {
       downvote: {
         type: Sequelize.INTEGER
       },
-      posted: {
-        type: Sequelize.BOOLEAN
-      },
       cards: {
         type: Sequelize.ARRAY(Sequelize.STRING)
+      },
+      cardName: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+      },
+      cardUrl: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+      },
+      posted: {
+        type: Sequelize.BOOLEAN
       },
       userId: {
         type: Sequelize.INTEGER

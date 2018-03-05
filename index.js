@@ -131,7 +131,10 @@ app.post("/search", function(req, res){
     if(!error && response.statusCode == 200){
       if(req.user){
         db.deck.findAll({
-          where: {userId: req.user.dataValues.id}
+          where: {
+            userId: req.user.dataValues.id,
+            posted: false
+          }
         })
         .then(function(decks){
           var dataObj = JSON.parse(body);
@@ -156,8 +159,39 @@ app.get("/card/:id", function(req, res){
 
 app.get("/decks", isLoggedIn, function(req, res){
   db.deck.findAll({
+    where: {
+      userId: req.user.dataValues.id
+    }
   }).then(function(decks){
     res.render("main/decks", {decks: decks})
+  })
+});
+
+app.get("/decks/:id", isLoggedIn, function(req, res){
+  db.deck.findOne({
+    where: {
+      id: req.params.id,
+      userId: req.user.dataValues.id
+    }
+  }).then(function(deck){
+    res.render("main/deckEdit", {deck: deck});
+  })
+})
+
+app.put("/decks/:id", isLoggedIn, function(req, res){
+  //on submit send here to update
+
+})
+
+app.delete("/decks/:id", isLoggedIn, function(req, res){
+  db.deck.destroy({
+    where: {
+      id: req.params.id,
+      userId: req.user.dataValues.id
+    }
+  }).then(function(deletedCard){
+    req.flash("success", "Deck Deleted")
+    res.send()
   })
 });
 
@@ -166,20 +200,49 @@ app.put("/decks/:deckId/add/:cardId", isLoggedIn, function(req, res){
     where: {id: req.params.deckId}
   })
   .then(function(deck){
+    console.log(this.deckAddCardName)
     deck.cards.push(req.params.cardId)
+    deck.cardName.push(req.body.deckAddCardName)
+    deck.cardUrl.push(req.body.deckAddCardImg)
     db.deck.update({
-      cards: deck.cards
+      cards: deck.cards,
+      cardName: deck.cardName,
+      cardUrl: deck.cardUrl
     },{
       where: {id: deck.id}
     })
   })
+});
+
+app.put("/decks/:deckId/delete/:cardId", isLoggedIn, function(req, res){
+  db.deck.findOne({
+    where: {id: req.params.deckId}
+  })
+  .then(function(deck){
+    var rmIndex = deck.cards.indexOf(req.params.cardId)
+    deck.cards.splice(rmIndex, 1);
+    deck.cardName.splice(rmIndex, 1);
+    deck.cardUrl.splice(rmIndex, 1);
+    db.deck.update({
+      cards: deck.cards,
+      cardName: deck.cardName,
+      cardUrl: deck.cardUrl
+    },{
+      where: {id: deck.id}
+    }).then(function(data){
+      res.render("main/deckEdit")
+    })
+  })
 })
 
-app.post("/decks", isLoggedIn, function(req, res){
+app.post("/decks/create", isLoggedIn, function(req, res){
   db.deck.create({
     name: req.body.deckName,
     userId: req.user.dataValues.id,
-    cards: []
+    cards: [],
+    cardName: [],
+    cardUrl: [],
+    posted: false
   }).then(function(){
     req.flash("success", "Deck Created! Add Cards Now.")
     res.redirect("/decks")
@@ -223,6 +286,15 @@ app.delete("/favorite/:id", isLoggedIn, function(req, res){
 app.get("/posts", function(req, res){
   res.render("main/posts")
 });
+
+app.post("/posts", isLoggedIn, function(req, res){
+  //Add Post
+})
+
+app.put("/posts", isLoggedIn, function(req, res){
+  //update post
+  //update votes
+})
 
 var server = app.listen(process.env.PORT || 5000, function() {
 });

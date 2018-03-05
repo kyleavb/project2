@@ -8,7 +8,7 @@
       <div class="col s12 m6 l4 xl4">
         <div class="card black">
           <div class="card-image">
-            <img class="white-text" src="<%= result.imageUrl %>" alt="<%= result.name %>" onerror="this.src ='/img/card_back.jpeg';" height="311" width="223">
+            <img class="responsive-img" src="<%= result.imageUrl %>" alt="<%= result.name %>" onerror="this.src ='/img/card_back.jpeg';" height="311" width="223">
           </div>
           <div class="desc card-content white-text">
             <a href="/card/<%= result.id %>">
@@ -21,16 +21,17 @@
               <div class="col s4">
                 <% if(currentUser){ %>
                   <a class='dropdown-button btn' href='#' data-activates='dropdown<%= i %>'>+Deck</a>
-                  <ul id='dropdown<%= i %>' class='dropdown-content'>
                     <% if(decks){ %>
+                      <ul id='dropdown<%= i %>' class='dropdown-content'>
                       <% decks.forEach(function(deck){ %>
-                        <form class="addCard" method="" action="/decks/<%= deck.id %>/add/<%= result.id %>">
-                          <input type="hidden" value="<%= result.name %>" name="cardName">
-                          <input type="hidden" value="<%= result.imageUrl %>" name="cardImg">
-                          <input type="hidden" value="<%= result.id %>" name="cardId">
-                          <button type="submit"><%= deck.name %></button>
-                        </form>
-                        <br />
+                        <li>
+                            <form class="addCard" action="/decks/<%= deck.id %>/add/<%= result.id %>">
+                              <input type="hidden" value="<%= result.name %>" name="deckAddCardName">
+                              <input type="hidden" value="<%= result.imageUrl %>" name="deckAddardImg">
+                              <input type="hidden" value="<%= result.id %>" name="cardId">
+                              <button class="dropdown-button" type="submit"><%= deck.name %></button>
+                            </form>
+                        </li>
                       <% }) %>
                     <% }else{ %>
                       <li><a href="#!">No Decks</a></li>
