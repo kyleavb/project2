@@ -77,9 +77,18 @@ URL | VERB | ACTION | Purpose
 ## Development
 I had a good time creating this webapp.  While I wanted to include so much more, I was unable to get the finishing polish on I wanted.  
 
-### Wireframes
+## Wireframes
+### Landing Page
 ![alt text](https://github.com/kyleavb/project2/blob/master/public/img/Magic%20DB%20Landing.png)
+
+### Account Creation
 ![alt text](https://github.com/kyleavb/project2/blob/master/public/img/Create%20Account%20Page.png)
+
+### Profile Page
 ![alt text](https://github.com/kyleavb/project2/blob/master/public/img/Profile%20Page.png)
+
+### Search Page
 ![alt text](https://github.com/kyleavb/project2/blob/master/public/img/Search%20Page.png)
+
+### Posts Page
 ![alt text](https://github.com/kyleavb/project2/blob/master/public/img/New%20Mockup%201.png)
