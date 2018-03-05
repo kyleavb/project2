@@ -36,7 +36,12 @@
       <div class="row">
         <div class="col s12 center">
           <a class="btn left" href="/decks/<%= deck.id %>">Edit Deck</a>
-          <a class="btn tooltipped" data-position="top" data-delay="50" data-tooltip="Deck must have 30 cards." href="">Post Deck</a>
+          <% if(deck.cards.length >= 30 && deck.posted === false){ %>
+            <a class="btn addPost" data-position="top" data-delay="50" data-deck="<%= deck.id%>" data-tooltip="Deck must have 30 cards." href="/posts">Post Deck</a>
+          <% }else{%>
+            <a class="btn disabled" data-position="top" data-delay="50" data-tooltip="Deck must have 30 cards." href="">Post Deck</a>
+          <% } %>
+
           <a class="btn right deleteDeck" href="/decks/<%= deck.id %>">Delete Deck </a>
         </div>
       </div>

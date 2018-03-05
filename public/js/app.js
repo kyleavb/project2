@@ -1,4 +1,16 @@
-
+$(".addPost").click(function(e){
+  console.log("redirect")
+  e.preventDefault();
+  $.ajax({
+    method: "POST",
+    url:$(this).attr('href'),
+    data: {
+      deckId: $(this).attr('data-deck')
+    }
+  }).done(function(data){
+    location.reload();
+  })
+})
 $(".fav-delete").click(function(e){
   e.preventDefault();
   $.ajax({
@@ -35,7 +47,6 @@ $(".deleteDeck").click(function(e){
 })
 
 $(".addCard").submit(function(e){
-  console.log($(this).find('input[name="deckAddCardName"]').val())
   e.preventDefault();
   $.ajax({
     method: "PUT",

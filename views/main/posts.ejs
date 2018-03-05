@@ -1,1 +1,20 @@
 <h1>All Posts</h1>
+<hr>
+<% posts.forEach(function(post){ %>
+  <div class="row">
+    <div class="col s2 ">
+      <a class="upvote" href="#"><i class="material-icons">file_upload</i><%= post.deck.upvote %> Up</a>
+      <br />
+      <a class="upvote" href="#"><i class="material-icons">file_download</i><%= post.deck.downvote %> Down</a>
+    </div>
+    <div class="col s5">
+      <h5><%= post.deck.name %></h5>
+      <p>Card Count: <%= post.deck.cards.length %></p>
+      <p>Other cool analytics to come</p>
+    </div>
+    <div class="col s5">
+      <div class="valign-wrapper">
+        <a class="btn" href="/posts/<%= post.id %>">Review / Comment</a>
+      </div>
+  </div>
+<% }) %>

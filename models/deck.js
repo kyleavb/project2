@@ -8,10 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     cardName: DataTypes.ARRAY(DataTypes.STRING),
     cardUrl: DataTypes.ARRAY(DataTypes.STRING),
     posted: DataTypes.BOOLEAN,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    postId: DataTypes.INTEGER
   }, {});
   deck.associate = function(models) {
     // associations can be defined here
+    models.deck.hasMany(models.post);
   };
   return deck;
 };

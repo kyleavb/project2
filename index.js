@@ -178,11 +178,6 @@ app.get("/decks/:id", isLoggedIn, function(req, res){
   })
 })
 
-app.put("/decks/:id", isLoggedIn, function(req, res){
-  //on submit send here to update
-
-})
-
 app.delete("/decks/:id", isLoggedIn, function(req, res){
   db.deck.destroy({
     where: {
@@ -242,6 +237,8 @@ app.post("/decks/create", isLoggedIn, function(req, res){
     cards: [],
     cardName: [],
     cardUrl: [],
+    upvote: 0,
+    downvote: 0,
     posted: false
   }).then(function(){
     req.flash("success", "Deck Created! Add Cards Now.")
@@ -284,16 +281,38 @@ app.delete("/favorite/:id", isLoggedIn, function(req, res){
 });
 
 app.get("/posts", function(req, res){
-  res.render("main/posts")
+  db.post.findAll({
+    include: [db.deck]
+  })
+  .then(function(posts){
+    res.render("main/posts", {posts: posts})
+  })
+
 });
+
+app.get("/posts/:id",function(req, res){
+  //focus in on a post
+  res.render("main/postDetail")
+})
 
 app.post("/posts", isLoggedIn, function(req, res){
   //Add Post
+  db.post.create({
+    deckId: req.body.deckId,
+    userId: req.user.dataValues.id,
+    title: "test",
+  }).then(function(){
+    req.flash("success", "Deck Posted!")
+  })
 })
 
 app.put("/posts", isLoggedIn, function(req, res){
   //update post
   //update votes
+})
+
+app.delete("/posts", isLoggedIn, function(req, res){
+
 })
 
 var server = app.listen(process.env.PORT || 5000, function() {
